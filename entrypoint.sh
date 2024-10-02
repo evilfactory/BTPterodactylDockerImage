@@ -82,6 +82,10 @@ echo "Downloading SteamWorkshopDownloader"
 wget -N -q --show-progress https://github.com/evilfactory/SteamWorkshopDownloader/releases/download/latest/SteamWorkshopDownloader.linux-x64 -O SteamWorkshopDownloader.linux-x64
 chmod +x SteamWorkshopDownloader.linux-x64
 
+echo "Downloading run.sh"
+wget -N -q --show-progress https://raw.githubusercontent.com/evilfactory/BTPterodactylDockerImage/refs/heads/master/run.sh -O run.sh
+chmod +x run.sh
+
 touch custom_script.sh
 chmod +x custom_script.sh
 
