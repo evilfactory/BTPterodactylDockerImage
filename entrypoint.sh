@@ -70,6 +70,10 @@ chmod +x custom_script.sh
 
 # Replace Startup Variables
 MODIFIED_STARTUP=$(echo ${STARTUP} | sed -e 's/{{/${/g' -e 's/}}/}/g')
+
+if [[ "${MODIFIED_STARTUP}" != *"-simpleio"* ]]; then
+    MODIFIED_STARTUP=$(echo "${MODIFIED_STARTUP}" | sed -E 's#(DedicatedServer(\.exe)?)([[:space:]]|$)#\1 -simpleio\3#')
+fi
 # echo -e ":/home/container$ ${MODIFIED_STARTUP}"
 
 # Run the Server
