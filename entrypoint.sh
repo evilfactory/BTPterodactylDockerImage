@@ -57,29 +57,6 @@ else
     echo -e "Not updating game server as auto update was set to 0. Starting Server"
 fi
 
-echo "Downloading latest version of LuaCsForBarotrauma"
-wget -N  -q --show-progress https://github.com/evilfactory/LuaCsForBarotrauma/releases/download/latest/luacsforbarotrauma_patch_linux_server.zip -O luacsforbarotrauma_patch_linux_server.zip
-unzip -qo luacsforbarotrauma_patch_linux_server.zip
-
-pterodactylfix=" LuaUserData.RegisterType('System.Console')
-local Console = LuaUserData.CreateStatic('System.Console')
-Hook.Patch('System.Console', 'get_IsOutputRedirected', function(self, ptable)
-    ptable.PreventExecution = true
-        return true
-end)
-Hook.Patch('System.Console', 'get_IsInputRedirected', function(self, ptable)
-        ptable.PreventExecution = false
-        return true
-end)
-Hook.Add('think', 'ConsoleInput', function()
-    if Console.KeyAvailable then
-                Game.ExecuteCommand(Console.ReadLine())
-    end
-end)"
-
-[ -f "LocalMods/LuaCsForBarotrauma/Lua/LuaSetup.lua" ] && echo "$pterodactylfix" >> LocalMods/LuaCsForBarotrauma/Lua/LuaSetup.lua
-[ -f "LocalMods/2559634234/Lua/LuaSetup.lua" ] && echo "$pterodactylfix" >> LocalMods/2559634234/Lua/LuaSetup.lua
-
 echo "Downloading SteamWorkshopDownloader"
 wget -N -q --show-progress https://github.com/evilfactory/SteamWorkshopDownloader/releases/download/latest/SteamWorkshopDownloader.linux-x64 -O SteamWorkshopDownloader.linux-x64
 chmod +x SteamWorkshopDownloader.linux-x64
